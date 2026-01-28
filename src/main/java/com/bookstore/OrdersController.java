@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/orders")
-@Tag(name = "Orders", description = "Order management APIs")
+@Tag(name = "Orders", description = "Order management APIs for testing")
 public class OrdersController {
     // In-memory storage for demo purposes
     private final HashMap<String, Order> orders = new HashMap<>();
