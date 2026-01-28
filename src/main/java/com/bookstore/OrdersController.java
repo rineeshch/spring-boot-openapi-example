@@ -24,7 +24,7 @@ public class OrdersController {
     // In-memory storage for demo purposes
     private final HashMap<String, Order> orders = new HashMap<>();
 
-    @Operation(summary = "Create a new order", description = "Create a new order for publications (test) - ")
+    @Operation(summary = "Create a new order", description = "Create a new order for publications (test) - -")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Order created successfully",
                     content = @Content(schema = @Schema(implementation = Order.class), mediaType = "application/json")),
@@ -165,4 +165,24 @@ public class OrdersController {
                 return false;
         }
     }
+    @Operation(summary = "Get orders by status", description = "Retrieve all orders with a given status")
+@ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Successful operation",
+        content = @Content(array = @ArraySchema(schema = @Schema(implementation = Order.class)))),
+    @ApiResponse(responseCode = "400", description = "Invalid status",
+        content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+})
+@GetMapping("/status/{status}")
+public ResponseEntity<?> getOrdersByStatus(
+        @Parameter(description = "Order status to filter by", required = true)
+        @PathVariable Models.OrderStatus status) {
+
+    List<Order> result = new ArrayList<>();
+    for (Order o : orders.values()) {
+        if (o.getStatus() == status) {
+            result.add(o);
+        }
+    }
+    return ResponseEntity.ok(result);
+}
 }
