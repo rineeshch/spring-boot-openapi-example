@@ -24,7 +24,7 @@ public class OrdersController {
     // In-memory storage for demo purposes
     private final HashMap<String, Order> orders = new HashMap<>();
 
-    @Operation(summary = "Create a new order", description = "Create a new order for publications")
+    @Operation(summary = "Create a new order", description = "Create a new order for publications (test) - ")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Order created successfully",
                     content = @Content(schema = @Schema(implementation = Order.class), mediaType = "application/json")),
